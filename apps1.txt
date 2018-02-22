@@ -1,0 +1,275 @@
+//*********************************************************************************************************************************************
+//******************************************* Add & Display the Vendor's  *********************************************************************
+//*********************************************************************************************************************************************
+
+//*********************************************************************************************************************************************
+// Add a new Vendor in Vendor sheet.  
+// Run the addVendor function then check into Vendor sheet for inserted records are correct or not.
+
+// Sample input Function call :  addVendor()
+
+function vendor_addVendor() {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('Vendor');
+  
+  var id = ScriptProperties.getProperty("vendorId");
+  id = (id==null) ? "1": (parseInt(id)+1).toString();
+  ScriptProperties.setProperty("vendorId", id); 
+  var name="Rohan Sharma";           // Sample input
+  var address="India";               // Sample input
+  var phone="9921342734";            // Sample input
+  var gstr="1234456";                // Sample input
+  var email="test@test.com";         // Sample input
+  sheet.appendRow([id, name, address, phone, gstr, email]);
+}
+
+//*********************************************************************************************************************************************
+// Add a new Vendor using parmeters in Vendor sheet. Passing parameters to function
+// Run the addVendorUsingParameters function then check into Vendor sheet for inserted records are correct or not.
+
+// Sample input function call : addVendorUsingParameters("nameP", "addressP", "phoneP", "gstrP", "emailP");
+
+function vendor_addVendorUsingParameters(nameP, addressP, phoneP, gstrP, emailP) {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('Vendor');
+  
+  var id = ScriptProperties.getProperty("vendorId");
+  id = (id==null) ? "1": (parseInt(id)+1).toString();
+  ScriptProperties.setProperty("vendorId", id); 
+  var name=nameP;
+  var address=addressP;
+  var phone=phoneP;
+  var gstr=gstrP;
+  var email=emailP;
+  sheet.appendRow([id, name, address, phone, gstr, email]);
+}
+
+//*********************************************************************************************************************************************
+// Display all the Vendors name in arrayList. Its pull data from B column of Vendor sheet.  
+// Run the viewVendors function then press the ctrl+Enter keys for checking the output is correct or not.
+
+// Sample input Function call :  viewRequirements()
+// Sample output              :  [Kiran Mahale, Rohan Sharma]
+
+
+function vendor_viewVendors() {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('Vendor');
+  var allVendors=sheet.getDataRange().getValues();
+  var response=new Array();
+  for(var i=1;i<allVendors.length;i++)
+  {
+    var responseTemp=new Array();
+    var id = (allVendors[i][0]==undefined) ? "" : allVendors[i][0].toString();
+    var name = (allVendors[i][1]==undefined) ? "" : allVendors[i][1].toString();
+    var address = (allVendors[i][2]==undefined) ? "" : allVendors[i][2].toString();
+    var phone = (allVendors[i][3]==undefined) ? "" : allVendors[i][3].toString();
+    var gstr = (allVendors[i][4]==undefined) ? "" : allVendors[i][4].toString();
+    var email = (allVendors[i][5]==undefined) ? "" : allVendors[i][5].toString();
+    var str=id+","+name+","+address+","+phone+","+gstr+","+email;
+    if(name !="" && name.toString() !="undefined") { responseTemp.push(str);
+                                                  response.push(responseTemp); }
+  }
+  Logger.log(response);
+  return getHTMLTable(response,"","")
+}
+
+
+//*********************************************************************************************************************************************
+//******************************************* Add & View Requirements  ************************************************************************
+//*********************************************************************************************************************************************
+
+
+//*********************************************************************************************************************************************
+// Add a new requirements using parmeters in Vendor sheet. Passing parameters to function
+// Run the addRequirementsUsingParameters function then check into Requirements sheet for inserted records are correct or not.
+
+// Sample function call : addRequirementsUsingParameters("destinationP", "sizeOfTruckP", "noOfMetersP", "selectedVendorP");
+// Id	Destination	Size of truck	No. of meters	SelectedVendor	ApproveSelectedVendor
+
+function vendor_addRequirementsUsingParameters(destinationP, sizeOfTruckP, noOfMetersP, selectedVendorP) { 
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('Requirements');
+  
+  var id = ScriptProperties.getProperty("requirementId");
+  id = (id==null) ? "1": (parseInt(id)+1).toString();
+  ScriptProperties.setProperty("requirementId", id); 
+  var destination=destinationP;
+  var sizeOfTruck=sizeOfTruckP;
+  var noOfMeters=noOfMetersP;
+  var selectedVendor=selectedVendorP;
+  var approveSelectedVendor=(selectedVendor==undefined || selectedVendor=="") ? "": selectedVendor;
+  sheet.appendRow([id, destination, sizeOfTruck, noOfMeters, selectedVendor, approveSelectedVendor]);
+}
+
+function test() {
+  // addRequirementsUsingParameters("destinationP", "sizeOfTruckP", "noOfMetersP", "selectedVendorP");
+}
+
+//*********************************************************************************************************************************************
+// Display all the requirements details in arrayList. Its pull data from from Requirements sheet.  
+// Run the viewRequirements function then press the ctrl+Enter keys for checking the output is correct or not.
+
+// Sample input Function call :  viewRequirements()
+// Sample output              :  [[1,destinationP,sizeOfTruckP,noOfMetersP,selectedVendorP,approveSelectedVendorP], 
+//                                [2,destinationP,sizeOfTruckP,noOfMetersP,selectedVendorP,approveSelectedVendorP]]
+
+
+function vendor_viewRequirements() {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('Requirements');
+  var allRequirements=sheet.getDataRange().getValues();
+  var response=new Array();
+  for(var i=1;i<allRequirements.length;i++)
+  {
+    var responseTemp=new Array();
+    var id = (allRequirements[i][0]==undefined) ? "" : allRequirements[i][0].toString();
+    var destination = (allRequirements[i][1]==undefined) ? "" : allRequirements[i][1].toString();
+    var sizeOfTruck = (allRequirements[i][2]==undefined) ? "" : allRequirements[i][2].toString();
+    var noOfMeters = (allRequirements[i][3]==undefined) ? "" : allRequirements[i][3].toString();
+    var selectedVendor = (allRequirements[i][4]==undefined) ? "" : allRequirements[i][4].toString();
+    var approveSelectedVendor = (allRequirements[i][5]==undefined) ? "" : allRequirements[i][5].toString();
+    var str=id+","+destination+","+sizeOfTruck+","+noOfMeters+","+selectedVendor+","+approveSelectedVendor;
+    if(id !="" && id.toString() !="undefined" )  { responseTemp.push(str);
+                                                  response.push(responseTemp); }
+  }
+  Logger.log(response);
+  return getHTMLTable(response,"","");
+}
+
+//*********************************************************************************************************************************************
+// Display all the Selected Vendor details in arrayList. Its pull data from E column of Requirements sheet.  
+// Run the approveSelectedVendor function then press the ctrl+Enter keys for checking the output is correct or not.
+
+// Sample input Function call : approveSelectedVendor()
+// Sample output              : [selectedVendorP, selectedVendorP]
+
+
+function vendor_approveSelectedVendor() {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('Requirements');
+  var allVendors=sheet.getRange('E2:E'+sheet.getLastRow()).getValues();
+  var response=new Array();
+  var responseTemp=new Array();
+  for(var i=0;i<allVendors.length;i++)
+  {
+    var name = (allVendors[i][0]==undefined) ? "" : allVendors[i][0].toString();
+    if(name !="") responseTemp.push(name);
+  }
+  response.push(responseTemp);
+  Logger.log(response);
+  return response;
+}
+
+
+
+
+
+//*********************************************************************************************************************************************
+//******************************************* Requirement Vendor Interaction  *****************************************************************
+//*********************************************************************************************************************************************
+
+//*********************************************************************************************************************************************
+// Display all the requirements details in arrayList. Its pull data from from Requirements sheet.  
+// Run the viewVendorInteraction function then press the ctrl+Enter keys for checking the output is correct or not.
+
+// Sample input Function call : viewVendorInteraction("1")
+// Sample output for success  : [1, Kiran Mahale, mahale.kiran198@gmail.com, 1, 100]
+// Sample output  for Failed  : [No records found]
+
+
+function vendor_viewVendorInteraction(requirementId) {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('RequirementVendorInteraction');
+  var allRequirements=sheet.getDataRange().getValues();
+  var response=new Array();
+  var responseTemp=new Array();
+  if(requirementId!=undefined) {
+    var requirementId=requirementId;
+    for(var i=1;i<allRequirements.length;i++)
+    {
+      if(allRequirements[i][0].toString()==requirementId.toString()){
+        
+        var vendor = (allRequirements[i][1]==undefined) ? "" : allRequirements[i][1].toString();
+        var email = (allRequirements[i][2]==undefined) ? "" : allRequirements[i][2].toString();
+        var fileId = (allRequirements[i][3]==undefined) ? "" : allRequirements[i][3].toString();
+        var price = (allRequirements[i][4]==undefined) ? "" : allRequirements[i][4].toString();
+        responseTemp.push(requirementId);
+        responseTemp.push(vendor);
+        responseTemp.push(email);
+        responseTemp.push(fileId);
+        responseTemp.push(price);
+        break;
+      }
+    }
+    
+  }
+  else responseTemp.push("No records found");
+  response.push(responseTemp);
+  Logger.log(response);
+  return response;
+}
+
+
+
+function test() {
+ vendor_viewVendorInteraction("1");
+//  vendor_updatePrice("1", "250");
+//  vendor_selectVendor();
+}
+
+//*********************************************************************************************************************************************
+// Display all the requirements details in arrayList. Its pull data from from Requirements sheet.  
+// Run the viewVendorInteraction function then press the ctrl+Enter keys for checking the output is correct or not.
+
+// Sample input Function call : updatePrice("1", "250");
+// Sample output  for success : [Price successfully updated]
+// Sample output  for Failed  : [Price updation failed]
+
+
+function vendor_updatePrice(requirementId, price) {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('RequirementVendorInteraction');
+  var allRequirements=sheet.getDataRange().getValues();
+  var response=new Array();
+  var responseTemp=new Array();
+  if(requirementId!=undefined && price!=undefined ) {
+    var requirementId=requirementId;
+    var price=price;
+    for(var i=1;i<allRequirements.length;i++)
+    {
+      if(allRequirements[i][0].toString()==requirementId.toString()){
+        sheet.getRange(i+1, 5).setValue(price)
+        responseTemp.push("Price successfully updated");
+        break;
+      }
+    }
+    
+  }
+  else responseTemp.push("Price updation failed");
+  response.push(responseTemp);
+  Logger.log(response);
+  return response;
+}
+
+//*********************************************************************************************************************************************
+// Display all the Vendor details in arrayList. Its pull data from B column of Requirements sheet.  
+// Run the selectVendor function then press the ctrl+Enter keys for checking the output is correct or not.
+
+// Sample output :  [Kiran Mahale]
+
+function vendor_selectVendor() {
+  
+  var sheet=SpreadsheetApp.openById('1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8').getSheetByName('RequirementVendorInteraction');
+  var allVendors=sheet.getRange('B2:B'+sheet.getLastRow()).getValues();
+  var response=new Array();
+  var responseTemp=new Array();
+  for(var i=0;i<allVendors.length;i++)
+  {
+    var name = (allVendors[i][0]==undefined) ? "" : allVendors[i][0].toString();
+    if(name !="") responseTemp.push(name);
+  }
+  response.push(responseTemp);
+  Logger.log(response);
+  return response;
+}
