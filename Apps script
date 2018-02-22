@@ -273,3 +273,6 @@ function vendor_selectVendor() {
   Logger.log(response);
   return response;
 }
+
+
+https://docs.google.com/spreadsheets/d/1F0GRGcrRxLw7DBhbULfHaEIacEelQbkeGMGrlAksBj8/edit?usp=drivesdk
