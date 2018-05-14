@@ -9,4 +9,7 @@ Kiran Mahale.
 Pune, India.
 
 
+
+https://www.hackerearth.com/challenge/test/wma-java-tech-v2/?login=194cf8cc52a7328bc8e0c3de5c001fbc
+
 https://tests.mettl.com/authenticateKey/40b494b2
