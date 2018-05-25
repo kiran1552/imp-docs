@@ -7,3 +7,4 @@ I have 3+ experience on Google Apps Script. Bilded lots of web application on Go
 Thanks,
 Kiran Mahale.
 Pune, India.
+Wipro Technologies Test, URL:https://amcat15.aspiringminds.com, UName:mahale.kiran198@gmail.com_jwis, Pwd:a5ywdmfs, Validity from: 25 May 2018 11:20
