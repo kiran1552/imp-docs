@@ -10,6 +10,3 @@ Thanks,
 
 Following are your test login details:
 
-Test URL- https://amcat50.aspiringminds.com
-User Name - mahale.kiran198@gmail.com_geym
-Password - a3hc8q5c 
